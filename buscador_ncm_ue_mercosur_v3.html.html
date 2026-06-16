@@ -12,9 +12,9 @@
   --ok:#16a34a;--ok-bg:#dcfce7;--warn:#d97706;--warn-bg:#fef3c7;
   --err:#dc2626;--err-bg:#fee2e2;--info:#2563eb;--info-bg:#dbeafe;
   --purple:#7c3aed;--purple-bg:#ede9fe;--gray:#6b7280;--gray-bg:#f3f4f6;
+  --teal:#0d9488;--teal-bg:#ccfbf1;
   --radius:14px;--shadow:0 6px 24px rgba(10,61,107,.07);
-  --hero-from:#0a3d6b;--hero-to:#1976d2;
-  --transition:.25s ease;
+  --hero-from:#0a3d6b;--hero-to:#1976d2;--transition:.25s ease;
 }
 html.dark{
   --bg:#0f172a;--panel:#1e293b;--text:#f1f5f9;--muted:#94a3b8;--line:#334155;
@@ -23,214 +23,139 @@ html.dark{
 }
 *{box-sizing:border-box;margin:0}
 body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);transition:background var(--transition),color var(--transition)}
-.wrap{max-width:1560px;margin:0 auto;padding:20px 24px 40px}
-
-/* Hero */
-.hero{background:linear-gradient(135deg,var(--hero-from),var(--hero-to));color:#fff;border-radius:20px;padding:28px 32px;box-shadow:var(--shadow);margin-bottom:18px;position:relative;overflow:hidden}
+.wrap{max-width:1600px;margin:0 auto;padding:20px 24px 40px}
+.hero{background:linear-gradient(135deg,var(--hero-from),var(--hero-to));color:#fff;border-radius:20px;padding:26px 30px;box-shadow:var(--shadow);margin-bottom:18px;position:relative;overflow:hidden}
 .hero::after{content:'';position:absolute;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04);top:-120px;right:-60px}
-.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:8px}
-.hero-logo{height:48px;filter:brightness(0) invert(1);flex-shrink:0}
-.hero h1{font-size:26px;line-height:1.2}
-.hero p{opacity:.92;line-height:1.5;max-width:960px;font-size:14px}
-.theme-toggle{position:absolute;top:18px;right:20px;background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:999px;width:40px;height:40px;font-size:18px;cursor:pointer;backdrop-filter:blur(6px);transition:background var(--transition)}
+.hero-top{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.hero-logo{height:44px;filter:brightness(0) invert(1);flex-shrink:0}
+.hero h1{font-size:24px;line-height:1.2}
+.hero p{opacity:.92;line-height:1.5;max-width:980px;font-size:13px}
+.theme-toggle{position:absolute;top:16px;right:18px;background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:999px;width:38px;height:38px;font-size:17px;cursor:pointer;backdrop-filter:blur(6px);transition:background var(--transition)}
 .theme-toggle:hover{background:rgba(255,255,255,.25)}
-
-/* Cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:16px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);transition:background var(--transition),border var(--transition)}
-.card .lbl{font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
-.card .val{font-size:24px;font-weight:800}
-
-/* Notice */
-.notice{padding:14px 18px;border:1px solid #fed7aa;background:#fff7ed;color:#92400e;border-radius:var(--radius);margin-bottom:16px;line-height:1.45;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+.card .lbl{font-size:10px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.card .val{font-size:22px;font-weight:800}
+.notice{padding:12px 16px;border:1px solid #fed7aa;background:#fff7ed;color:#92400e;border-radius:var(--radius);margin-bottom:14px;line-height:1.4;font-size:12px}
 html.dark .notice{background:#431407;border-color:#78350f;color:#fbbf24}
-
-/* Panel */
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);transition:background var(--transition),border var(--transition)}
-
-/* Toolbar */
-.toolbar{display:grid;grid-template-columns:2fr .8fr .8fr .8fr .8fr .6fr auto auto;gap:10px;padding:14px 16px;margin-bottom:16px;align-items:end}
+.toolbar{display:grid;grid-template-columns:2fr .7fr .7fr .7fr .7fr .6fr auto auto;gap:8px;padding:12px 14px;margin-bottom:14px;align-items:end}
 @media(max-width:1200px){.toolbar{grid-template-columns:1fr 1fr 1fr 1fr}}
 @media(max-width:700px){.toolbar{grid-template-columns:1fr}}
-label{display:block;font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
-input,select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);font-size:13px;transition:border var(--transition),background var(--transition)}
+label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+input,select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);font-size:12px}
 input:focus,select:focus{outline:none;border-color:var(--brand2)}
-button{border:none;border-radius:10px;padding:9px 14px;font-weight:700;cursor:pointer;font-size:12px;transition:background var(--transition),color var(--transition)}
-.btn-p{background:var(--brand);color:#fff}
-.btn-p:hover{background:var(--brand2)}
+button{border:none;border-radius:10px;padding:8px 13px;font-weight:700;cursor:pointer;font-size:11px}
+.btn-p{background:var(--brand);color:#fff}.btn-p:hover{background:var(--brand2)}
 .btn-s{background:var(--accent);color:var(--brand)}
-
-/* Chapter cards */
-.chapters-toggle{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:700;font-size:14px;color:var(--brand)}
+.chapters-toggle{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;margin-bottom:6px;font-weight:700;font-size:13px;color:var(--brand)}
 .chapters-toggle .arrow{transition:transform .3s;display:inline-block}
 .chapters-toggle.open .arrow{transform:rotate(90deg)}
-.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-bottom:16px;max-height:0;overflow:hidden;transition:max-height .4s ease}
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:6px;margin-bottom:14px;max-height:0;overflow:hidden;transition:max-height .4s ease}
 .chapter-grid.show{max-height:2000px}
-.ch-card{text-align:center;padding:10px 6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
-.ch-card:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 4px 14px rgba(10,61,107,.12)}
-.ch-card .ch-num{font-size:20px;font-weight:800;color:var(--brand)}
-.ch-card .ch-cnt{font-size:10px;color:var(--muted)}
-
-/* Layout */
-.layout{display:grid;grid-template-columns:1.9fr .8fr;gap:16px;align-items:start}
+.ch-card{text-align:center;padding:8px 4px;background:var(--panel);border:1px solid var(--line);border-radius:10px;cursor:pointer;transition:background .2s,transform .2s}
+.ch-card:hover{background:var(--accent);transform:translateY(-2px)}
+.ch-card .ch-num{font-size:18px;font-weight:800;color:var(--brand)}
+.ch-card .ch-cnt{font-size:9px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:2fr .75fr;gap:14px;align-items:start}
 @media(max-width:1100px){.layout{grid-template-columns:1fr}.detail-panel{position:static!important}}
-
-/* Table */
 .table-wrap{overflow:hidden;padding:0}
 .table-scroll{overflow:auto;max-height:74vh}
 table{width:100%;border-collapse:collapse}
-thead th{position:sticky;top:0;z-index:3;background:var(--accent);color:var(--brand);text-align:left;padding:10px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.3px;border-bottom:2px solid var(--line);white-space:nowrap}
+thead th{position:sticky;top:0;z-index:3;background:var(--accent);color:var(--brand);text-align:left;padding:9px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.3px;border-bottom:2px solid var(--line);white-space:nowrap}
 html.dark thead th{background:#1a2744}
 thead th[title]{cursor:help}
-tbody td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
+tbody td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top;font-size:12px}
 tbody tr{cursor:pointer;transition:background .15s}
 tbody tr:hover{background:var(--accent)}
 tbody tr.active{background:#dbeafe}
 html.dark tbody tr.active{background:#1e3a5f}
-code{background:var(--gray-bg);padding:2px 6px;border-radius:6px;font-size:11px;border:1px solid var(--line)}
+code{background:var(--gray-bg);padding:2px 5px;border-radius:5px;font-size:10px;border:1px solid var(--line)}
 html.dark code{background:#334155}
-
-/* Badges */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;font-size:10px;font-weight:700;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:700;white-space:nowrap}
 .badge-pending{background:var(--warn-bg);color:var(--warn);border:1px solid #fde68a}
 .badge-ok{background:var(--ok-bg);color:var(--ok);border:1px solid #86efac}
 .badge-no{background:var(--err-bg);color:var(--err);border:1px solid #fca5a5}
 .badge-review{background:var(--info-bg);color:var(--info);border:1px solid #93c5fd}
 .badge-quota{background:var(--purple-bg);color:var(--purple);border:1px solid #c4b5fd}
 .badge-none{background:var(--gray-bg);color:var(--gray);border:1px solid #d1d5db}
+.badge-imp{background:var(--info-bg);color:var(--info);border:1px solid #93c5fd}
+.badge-exp{background:var(--teal-bg);color:var(--teal);border:1px solid #5eead4}
 html.dark .badge-pending{background:#451a03;border-color:#713f12}
 html.dark .badge-ok{background:#052e16;border-color:#166534}
 html.dark .badge-no{background:#450a0a;border-color:#7f1d1d}
 html.dark .badge-review{background:#172554;border-color:#1e40af}
 html.dark .badge-quota{background:#2e1065;border-color:#5b21b6}
 html.dark .badge-none{background:#1f2937;border-color:#374151}
-
-/* Pagination */
-.pager{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
-.pager button{min-width:32px}
-
-/* Detail */
-.detail-panel{padding:16px;position:sticky;top:16px}
-.detail-panel h2{font-size:18px;margin-bottom:12px}
-.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 10px;margin-bottom:12px}
-.kv .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
-.kv .v{font-size:13px;word-break:break-word}
-.mini{font-size:12px;color:var(--muted)}
-
-/* Footer */
-.footer{margin-top:20px;padding:16px;text-align:center;font-size:11px;color:var(--muted);line-height:1.5;display:flex;flex-direction:column;align-items:center;gap:8px}
-.footer-logo{height:28px;opacity:.5}
+html.dark .badge-imp{background:#172554;border-color:#1e40af}
+html.dark .badge-exp{background:#042f2e;border-color:#115e59}
+.pager{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+.pager button{min-width:30px}
+.detail-panel{padding:14px;position:sticky;top:14px}
+.detail-panel h2{font-size:17px;margin-bottom:10px}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:5px 8px;margin-bottom:10px}
+.kv .k{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.kv .v{font-size:12px;word-break:break-word}
+.mini{font-size:11px;color:var(--muted)}
+.footer{margin-top:18px;padding:14px;text-align:center;font-size:10px;color:var(--muted);line-height:1.5;display:flex;flex-direction:column;align-items:center;gap:6px}
+.footer-logo{height:24px;opacity:.5}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-<!-- HERO -->
 <section class="hero">
   <button class="theme-toggle" id="themeBtn" title="Modo oscuro / claro">🌙</button>
   <div class="hero-top">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Banco_Naci%C3%B3n.svg" alt="Banco Nación" class="hero-logo"/>
     <h1>Buscador de productos por posición arancelaria | Acuerdo UE‑Mercosur</h1>
   </div>
-  <p>Herramienta interna del Banco de la Nación Argentina. Base de datos NCM extraída del PDF oficial de la Nomenclatura Común del Mercosur. Incluye análisis de encuadre en el Acuerdo UE‑Mercosur. Versión v3.1 con semáforo visual, categoría de desgravación, fichas por capítulo, exportación a CSV y XLSX.</p>
+  <p>Herramienta interna del Banco de la Nación Argentina. Base NCM enriquecida con datos de la <strong>VUCE</strong> (vuce.gob.ar/acuerdoMercosur): categoría de desgravación, arancel base, arancel NMF, operación, requisito de origen. Versión v3.2.</p>
 </section>
 
-<!-- CARDS -->
 <section class="cards">
-  <div class="card"><div class="lbl">Total posiciones NCM</div><div class="val" id="cTotal">—</div></div>
+  <div class="card"><div class="lbl">Total registros</div><div class="val" id="cTotal">—</div></div>
   <div class="card"><div class="lbl">Resultados visibles</div><div class="val" id="cVisible">—</div></div>
   <div class="card"><div class="lbl">Capítulos</div><div class="val" id="cChapters">—</div></div>
-  <div class="card"><div class="lbl">Rango NCM</div><div class="val" id="cRange" style="font-size:15px">—</div></div>
+  <div class="card"><div class="lbl">Rango NCM</div><div class="val" id="cRange" style="font-size:14px">—</div></div>
 </section>
 
-<!-- NOTICE -->
 <div class="notice">
-  <strong>⚠ Advertencia metodológica:</strong> el campo <em>UE‑Mercosur</em> figura inicialmente como <strong>pendiente de validación documental</strong>. La <em>Categoría de desgravación</em> se completará al cruzar cada NCM contra el <em>Apéndice 2‑A‑2</em> del Acuerdo Interino. La columna <strong>Reintegro Exp. (%)</strong> corresponde al porcentaje de reintegro de exportación (RE) vigente según la NCM.
+  <strong>⚠ Fuentes de datos:</strong> base NCM 2017 (AEC/RE del PDF oficial) cruzada con la <strong>VUCE</strong> (<a href="https://www.vuce.gob.ar/acuerdoMercosur" target="_blank" style="color:inherit">vuce.gob.ar/acuerdoMercosur</a>). Las posiciones con categoría de desgravación asignada figuran como <em>encuadra</em>; las restantes como <em>pendiente de validación</em>.
 </div>
 
-<!-- TOOLBAR -->
 <section class="panel toolbar">
-  <div>
-    <label for="q">Buscar por NCM o descripción</label>
-    <input id="q" placeholder="Ej.: 8703.23.10, bovinos, maquinaria…"/>
-  </div>
-  <div>
-    <label for="fCap">Capítulo</label>
-    <select id="fCap"><option value="">Todos</option></select>
-  </div>
-  <div>
-    <label for="fStatus">Estado UE‑Mercosur</label>
-    <select id="fStatus">
-      <option value="">Todos</option>
-      <option value="encuadra">✅ Encuadra</option>
-      <option value="no_encuadra">❌ No encuadra</option>
-      <option value="pendiente_validacion_documental">🟡 Pendiente</option>
-      <option value="requiere_revision">🔵 Requiere revisión</option>
-      <option value="contingente">🟣 Contingente</option>
-    </select>
-  </div>
-  <div>
-    <label for="fDesg">Cat. desgravación</label>
-    <select id="fDesg">
-      <option value="">Todas</option>
-      <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-      <option value="6">6</option><option value="7">7</option><option value="8">8</option>
-      <option value="9">9</option><option value="10">10</option><option value="11">11</option>
-      <option value="12">12</option><option value="13">13</option><option value="14">14</option>
-      <option value="15">15</option><option value="TRQ">TRQ</option><option value="EXC">EXC</option>
-      <option value="S">S</option>
-    </select>
-  </div>
-  <div>
-    <label for="fSize">Filas / pág.</label>
-    <select id="fSize">
-      <option value="50">50</option><option value="100" selected>100</option>
-      <option value="250">250</option><option value="500">500</option>
-    </select>
-  </div>
-  <div>
-    <label>&nbsp;</label>
-    <div style="display:flex;gap:5px">
-      <button class="btn-p" id="btnCsv" title="Exportar CSV">📥 CSV</button>
-      <button class="btn-p" id="btnXlsx" title="Exportar XLSX">📥 XLSX</button>
-    </div>
-  </div>
-  <div>
-    <label>&nbsp;</label>
-    <button class="btn-s" id="btnClear">Limpiar</button>
-  </div>
+  <div><label for="q">Buscar NCM / descripción</label><input id="q" placeholder="Ej.: 8703, bovinos, maquinaria…"/></div>
+  <div><label for="fCap">Capítulo</label><select id="fCap"><option value="">Todos</option></select></div>
+  <div><label for="fOp">Operación</label><select id="fOp"><option value="">Todas</option><option value="Importación">Importación</option><option value="Exportación">Exportación</option></select></div>
+  <div><label for="fStatus">UE‑Mercosur</label><select id="fStatus"><option value="">Todos</option><option value="encuadra">✅ Encuadra</option><option value="no_encuadra">❌ No encuadra</option><option value="pendiente_validacion_documental">🟡 Pendiente</option><option value="requiere_revision">🔵 Revisión</option><option value="contingente">🟣 Contingente</option></select></div>
+  <div><label for="fDesg">Cat. desgrav.</label><select id="fDesg"><option value="">Todas</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="TRQ">TRQ</option><option value="EXC">EXC</option><option value="S">S</option></select></div>
+  <div><label for="fSize">Filas</label><select id="fSize"><option value="50">50</option><option value="100" selected>100</option><option value="250">250</option><option value="500">500</option></select></div>
+  <div><label>&nbsp;</label><div style="display:flex;gap:4px"><button class="btn-p" id="btnCsv">📥CSV</button><button class="btn-p" id="btnXlsx">📥XLSX</button></div></div>
+  <div><label>&nbsp;</label><button class="btn-s" id="btnClear">Limpiar</button></div>
 </section>
 
-<!-- CHAPTER CARDS -->
 <div class="chapters-toggle" id="chToggle"><span class="arrow">▶</span> Fichas por capítulo</div>
 <div class="chapter-grid" id="chGrid"></div>
 
-<!-- LAYOUT -->
 <section class="layout">
   <div class="panel table-wrap">
     <div class="table-scroll" id="tableScroll">
       <table>
-        <thead>
-          <tr>
-            <th>NCM</th>
-            <th>Descripción</th>
-            <th>AEC</th>
-            <th title="Categoría de desgravación según Acuerdo UE-Mercosur">Cat. Desgrav.</th>
-            <th title="RE = Reintegro de Exportación (%)">Reintegro Exp. (%)</th>
-            <th>Cap.</th>
-            <th>UE‑Mercosur</th>
-            <th>Pág.</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th>NCM</th>
+          <th>Operación</th>
+          <th>Descripción</th>
+          <th>AEC</th>
+          <th title="Categoría de desgravación según Acuerdo UE-Mercosur">Cat. Desgrav.</th>
+          <th title="RE = Reintegro de Exportación (%)">Reint. Exp.(%)</th>
+          <th>Cap.</th>
+          <th>UE‑Mercosur</th>
+          <th>Pág.</th>
+        </tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
-    <div class="pager">
-      <button class="btn-s" id="pgPrev">◀ Anterior</button>
-      <span id="pgInfo">—</span>
-      <button class="btn-s" id="pgNext">Siguiente ▶</button>
-    </div>
+    <div class="pager"><button class="btn-s" id="pgPrev">◀</button><span id="pgInfo">—</span><button class="btn-s" id="pgNext">▶</button></div>
   </div>
   <aside class="panel detail-panel">
     <h2>Ficha de posición</h2>
@@ -239,41 +164,36 @@ html.dark .badge-none{background:#1f2937;border-color:#374151}
   </aside>
 </section>
 
-<!-- FOOTER -->
 <div class="footer">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Banco_Naci%C3%B3n.svg" alt="Banco Nación" class="footer-logo"/>
-  <span>Herramienta interna · Banco de la Nación Argentina · Colocá <code>buscador_ncm_ue_mercosur_v3.html</code> y <code>ncm_desde_pagina_13.json</code> en la misma carpeta.</span>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Banco_Naci%C3%B3n.svg" alt="BNA" class="footer-logo"/>
+  <span>Banco de la Nación Argentina · Datos: NCM 2017 + VUCE · <code>ncm_enriched_vuce.json</code></span>
 </div>
 </div>
 
 <script>
-/* ── helpers ── */
 const $=id=>document.getElementById(id);
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-
-/* ── state ── */
 let items=[],filtered=[],page=0,selNcm=null;
 
-/* ── badge helper ── */
-function badgeClass(s){const m={'encuadra':'badge-ok','no_encuadra':'badge-no','pendiente_validacion_documental':'badge-pending','requiere_revision':'badge-review','contingente':'badge-quota'};return m[s]||'badge-none'}
-function badgeDot(s){const m={'encuadra':'🟢','no_encuadra':'🔴','pendiente_validacion_documental':'🟡','requiere_revision':'🔵','contingente':'🟣'};return m[s]||'⚪'}
-function badge(s){return `<span class="badge ${badgeClass(s)}">${badgeDot(s)} ${(s||'sin_dato').replace(/_/g,' ')}</span>`}
-function catDesg(x){return x?.acuerdo_ue_mercosur?.categoria_desgravacion ?? '—'}
+function bc(s){const m={'encuadra':'badge-ok','no_encuadra':'badge-no','pendiente_validacion_documental':'badge-pending','requiere_revision':'badge-review','contingente':'badge-quota'};return m[s]||'badge-none'}
+function bd(s){const m={'encuadra':'🟢','no_encuadra':'🔴','pendiente_validacion_documental':'🟡','requiere_revision':'🔵','contingente':'🟣'};return m[s]||'⚪'}
+function badge(s){return `<span class="badge ${bc(s)}">${bd(s)} ${(s||'sin_dato').replace(/_/g,' ')}</span>`}
+function opBadge(o){if(!o)return '—';const isImp=/import/i.test(o);return `<span class="badge ${isImp?'badge-imp':'badge-exp'}">${isImp?'📦':'🚢'} ${o}</span>`}
+function cd(x){return x?.acuerdo_ue_mercosur?.categoria_desgravacion||'—'}
 
-/* ── theme ── */
-function initTheme(){if(localStorage.getItem('ncm-theme')==='dark')document.documentElement.classList.add('dark');updBtn()}
-function togTheme(){document.documentElement.classList.toggle('dark');localStorage.setItem('ncm-theme',document.documentElement.classList.contains('dark')?'dark':'light');updBtn()}
-function updBtn(){$('themeBtn').textContent=document.documentElement.classList.contains('dark')?'☀️':'🌙'}
+function initTheme(){if(localStorage.getItem('ncm-theme')==='dark')document.documentElement.classList.add('dark');uBtn()}
+function togTheme(){document.documentElement.classList.toggle('dark');localStorage.setItem('ncm-theme',document.documentElement.classList.contains('dark')?'dark':'light');uBtn()}
+function uBtn(){$('themeBtn').textContent=document.documentElement.classList.contains('dark')?'☀️':'🌙'}
 
-/* ── filter & paginate ── */
 function applyFilter(){
-  const q=norm($('q').value),cap=$('fCap').value,st=$('fStatus').value,dg=$('fDesg').value;
+  const q=norm($('q').value),cap=$('fCap').value,op=$('fOp').value,st=$('fStatus').value,dg=$('fDesg').value;
   filtered=items.filter(x=>{
     const okQ=!q||norm(x.search_text).includes(q)||norm(x.ncm).includes(q)||norm(x.codigo_sin_puntos).includes(q);
     const okC=!cap||x.capitulo_numero===cap;
+    const okO=!op||x.operacion===op;
     const okS=!st||(x.acuerdo_ue_mercosur?.encuadre_preferencial||'')===st;
-    const okD=!dg||(x.acuerdo_ue_mercosur?.categoria_desgravacion||'')=== dg;
-    return okQ&&okC&&okS&&okD;
+    const okD=!dg||(x.acuerdo_ue_mercosur?.categoria_desgravacion||'')===dg;
+    return okQ&&okC&&okO&&okS&&okD;
   });
   page=0;render();
 }
@@ -283,95 +203,100 @@ function tp(){return Math.max(1,Math.ceil(filtered.length/ps()))}
 function render(){
   $('cVisible').textContent=filtered.length.toLocaleString('es-AR');
   const s=page*ps(),e=Math.min(s+ps(),filtered.length),rows=filtered.slice(s,e);
-  $('pgInfo').textContent=`Pág. ${page+1} de ${tp()} — ${filtered.length.toLocaleString('es-AR')} resultados`;
+  $('pgInfo').textContent=`${page+1}/${tp()} — ${filtered.length.toLocaleString('es-AR')}`;
   const tb=$('tbody');
   tb.innerHTML=rows.map(x=>`
-    <tr data-n="${x.ncm}" class="${selNcm===x.ncm?'active':''}">
+    <tr data-n="${x.ncm}${x.operacion||''}" class="${selNcm===(x.ncm+(x.operacion||''))?'active':''}">
       <td><code>${x.ncm}</code></td>
+      <td>${opBadge(x.operacion)}</td>
       <td>${x.descripcion||''}</td>
       <td>${x.aec??''}</td>
-      <td>${catDesg(x)}</td>
+      <td>${cd(x)}</td>
       <td>${x.re??''}</td>
       <td>${x.capitulo_numero||''}</td>
       <td>${badge(x.acuerdo_ue_mercosur?.encuadre_preferencial)}</td>
       <td>${x.pagina_pdf??''}</td>
     </tr>`).join('');
   tb.querySelectorAll('tr').forEach(tr=>{
-    tr.addEventListener('click',()=>{selNcm=tr.dataset.n;const it=rows.find(r=>r.ncm===selNcm);showD(it);tb.querySelectorAll('tr').forEach(r=>r.classList.toggle('active',r.dataset.n===selNcm))});
+    tr.addEventListener('click',()=>{selNcm=tr.dataset.n;const it=rows.find(r=>(r.ncm+(r.operacion||''))===selNcm);showD(it);tb.querySelectorAll('tr').forEach(r=>r.classList.toggle('active',r.dataset.n===selNcm))});
   });
-  if(rows.length&&!rows.find(r=>r.ncm===selNcm)){selNcm=rows[0].ncm;showD(rows[0]);tb.querySelector('tr')?.classList.add('active')}
+  if(rows.length&&!rows.find(r=>(r.ncm+(r.operacion||''))===selNcm)){selNcm=rows[0].ncm+(rows[0].operacion||'');showD(rows[0]);tb.querySelector('tr')?.classList.add('active')}
 }
 
 function showD(x){
   if(!x){$('detail').innerHTML='<div class="mini">Sin selección.</div>';return}
+  const ue=x.acuerdo_ue_mercosur||{};
   $('detail').innerHTML=`
-    <div style="margin:12px 0">${badge(x.acuerdo_ue_mercosur?.encuadre_preferencial)}</div>
+    <div style="margin:10px 0">${badge(ue.encuadre_preferencial)} ${opBadge(x.operacion)}</div>
     <div class="kv">
       <div class="k">NCM</div><div class="v"><code>${x.ncm}</code></div>
+      <div class="k">Operación</div><div class="v">${x.operacion||'—'}</div>
       <div class="k">Descripción</div><div class="v">${x.descripcion||''}</div>
       <div class="k">AEC</div><div class="v">${x.aec??'—'}</div>
-      <div class="k">Cat. desgravación</div><div class="v">${catDesg(x)}</div>
-      <div class="k">Reintegro Exp. (%)</div><div class="v">${x.re??'—'}</div>
-      <div class="k">Partida</div><div class="v">${x.partida||''}</div>
+      <div class="k">Cat. desgravación</div><div class="v">${ue.categoria_desgravacion||'—'}</div>
+      <div class="k">Arancel base</div><div class="v">${ue.arancel_base||'—'}</div>
+      <div class="k">Arancel NMF vigente</div><div class="v">${ue.arancel_nmf_vigente||'—'}</div>
+      <div class="k">Reintegro Exp.(%)</div><div class="v">${x.re??'—'}</div>
+      <div class="k">Aclaraciones</div><div class="v" style="font-size:11px">${ue.aclaraciones_cronogramas||'—'}</div>
+      <div class="k">Requisito origen</div><div class="v" style="font-size:11px">${ue.requisito_origen||'—'}</div>
       <div class="k">Capítulo</div><div class="v">${x.capitulo||x.capitulo_numero||''}</div>
       <div class="k">Sección</div><div class="v">${x.seccion||''}</div>
-      <div class="k">Encabezado</div><div class="v">${x.encabezado_inmediato||''}</div>
       <div class="k">Página PDF</div><div class="v">${x.pagina_pdf??''}</div>
+      <div class="k">Fuente</div><div class="v">${ue.fuente||'—'}</div>
     </div>
-    <div class="notice" style="margin:0"><strong>Motivo:</strong> ${x.acuerdo_ue_mercosur?.motivo||'Sin observaciones.'}</div>`;
+    <div class="notice" style="margin:0"><strong>Motivo:</strong> ${ue.motivo||'Sin observaciones.'}</div>`;
 }
 
-/* ── chapter cards ── */
 function buildCh(){
   const m={};items.forEach(x=>{const c=x.capitulo_numero;if(c)m[c]=(m[c]||0)+1});
   const ks=Object.keys(m).sort((a,b)=>Number(a)-Number(b));
   $('cChapters').textContent=ks.length;
-  $('chGrid').innerHTML=ks.map(k=>`<div class="ch-card" data-ch="${k}"><div class="ch-num">${k}</div><div class="ch-cnt">${m[k]} pos.</div></div>`).join('');
+  $('chGrid').innerHTML=ks.map(k=>`<div class="ch-card" data-ch="${k}"><div class="ch-num">${k}</div><div class="ch-cnt">${m[k]}</div></div>`).join('');
   $('chGrid').querySelectorAll('.ch-card').forEach(el=>{el.addEventListener('click',()=>{$('fCap').value=el.dataset.ch;applyFilter();$('tableScroll').scrollIntoView({behavior:'smooth'})})});
 }
 
-/* ── export CSV ── */
 function expCsv(){
   const bom='\uFEFF';
-  const h=['NCM','CodigoSinPuntos','Descripcion','AEC','CategoriaDesgravacion','ReintegroExportacion','Capitulo','CapituloNumero','Seccion','PaginaPDF','EncuadreUEMercosur','Motivo'];
+  const h=['NCM','Codigo','Operacion','Descripcion','AEC','CatDesgravacion','ArancelBase','ArancelNMF','ReintegroExp','Capitulo','CapNum','Seccion','PaginaPDF','EncuadreUEMercosur','Aclaraciones','RequisitoOrigen','Motivo'];
   const esc=v=>{const s=(v??'').toString().replace(/"/g,'""');return '"'+s+'"'};
   const lines=[h.join(';')];
-  filtered.forEach(r=>{lines.push([r.ncm,r.codigo_sin_puntos,r.descripcion,r.aec,r.acuerdo_ue_mercosur?.categoria_desgravacion||'',r.re,r.capitulo,r.capitulo_numero,r.seccion,r.pagina_pdf,r.acuerdo_ue_mercosur?.encuadre_preferencial,r.acuerdo_ue_mercosur?.motivo].map(esc).join(';'))});
+  filtered.forEach(r=>{const u=r.acuerdo_ue_mercosur||{};lines.push([r.ncm,r.codigo_sin_puntos,r.operacion,r.descripcion,r.aec,u.categoria_desgravacion,u.arancel_base,u.arancel_nmf_vigente,r.re,r.capitulo,r.capitulo_numero,r.seccion,r.pagina_pdf,u.encuadre_preferencial,u.aclaraciones_cronogramas,u.requisito_origen,u.motivo].map(esc).join(';'))});
   dl('ncm_ue_mercosur.csv',bom+lines.join('\r\n'),'text/csv;charset=utf-8;');
 }
-
-/* ── export XLSX ── */
 function expXlsx(){
-  if(typeof XLSX==='undefined'){alert('SheetJS no se cargó. Verificá la conexión a internet.');return}
-  const rows=filtered.map(r=>({NCM:r.ncm,Codigo:r.codigo_sin_puntos,Descripcion:r.descripcion,AEC:r.aec,Cat_Desgravacion:r.acuerdo_ue_mercosur?.categoria_desgravacion||'',Reintegro_Exp:r.re,Capitulo:r.capitulo,Cap_Num:r.capitulo_numero,Seccion:r.seccion,Pagina_PDF:r.pagina_pdf,Encuadre_UE_Mercosur:r.acuerdo_ue_mercosur?.encuadre_preferencial,Motivo:r.acuerdo_ue_mercosur?.motivo}));
+  if(typeof XLSX==='undefined'){alert('SheetJS no cargó.');return}
+  const rows=filtered.map(r=>{const u=r.acuerdo_ue_mercosur||{};return{NCM:r.ncm,Codigo:r.codigo_sin_puntos,Operacion:r.operacion,Descripcion:r.descripcion,AEC:r.aec,Cat_Desgravacion:u.categoria_desgravacion,Arancel_Base:u.arancel_base,Arancel_NMF:u.arancel_nmf_vigente,Reintegro_Exp:r.re,Capitulo:r.capitulo,Cap_Num:r.capitulo_numero,Seccion:r.seccion,Pagina_PDF:r.pagina_pdf,Encuadre:u.encuadre_preferencial,Aclaraciones:u.aclaraciones_cronogramas,Requisito_Origen:u.requisito_origen}});
   const ws=XLSX.utils.json_to_sheet(rows);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'NCM');XLSX.writeFile(wb,'ncm_ue_mercosur.xlsx');
 }
-
 function dl(n,c,t){const b=new Blob([c],{type:t});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
 
-/* ── init ── */
 async function init(){
   initTheme();$('themeBtn').addEventListener('click',togTheme);
+  let data;
   try{
-    const res=await fetch('ncm_desde_pagina_13.json');const data=await res.json();
-    items=data.items||[];
-    $('cTotal').textContent=items.length.toLocaleString('es-AR');
-    const f=data.estadisticas?.primer_codigo||items[0]?.ncm||'—';
-    const l=data.estadisticas?.ultimo_codigo||items[items.length-1]?.ncm||'—';
-    $('cRange').textContent=`${f} … ${l}`;
-    const caps=[...new Set(items.map(x=>x.capitulo_numero).filter(Boolean))].sort((a,b)=>Number(a)-Number(b));
-    caps.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=`Cap. ${c}`;$('fCap').appendChild(o)});
-    buildCh();applyFilter();
-    ['q','fCap','fStatus','fDesg','fSize'].forEach(id=>{$(id).addEventListener('input',applyFilter);$(id).addEventListener('change',applyFilter)});
-    $('btnClear').addEventListener('click',()=>{$('q').value='';$('fCap').value='';$('fStatus').value='';$('fDesg').value='';$('fSize').value='100';applyFilter()});
-    $('pgPrev').addEventListener('click',()=>{if(page>0){page--;render();$('tableScroll').scrollTo(0,0)}});
-    $('pgNext').addEventListener('click',()=>{if(page<tp()-1){page++;render();$('tableScroll').scrollTo(0,0)}});
-    $('btnCsv').addEventListener('click',expCsv);
-    $('btnXlsx').addEventListener('click',expXlsx);
-    $('chToggle').addEventListener('click',()=>{$('chToggle').classList.toggle('open');$('chGrid').classList.toggle('show')});
+    // Intentar primero el JSON enriquecido con VUCE
+    let res=await fetch('ncm_enriched_vuce.json');
+    if(!res.ok) res=await fetch('ncm_desde_pagina_13.json');
+    data=await res.json();
   }catch(err){
-    $('tbody').innerHTML=`<tr><td colspan="8" style="color:var(--err)">No se pudo cargar <code>ncm_desde_pagina_13.json</code>: ${err}</td></tr>`;
+    try{const res=await fetch('ncm_desde_pagina_13.json');data=await res.json()}
+    catch(e2){$('tbody').innerHTML=`<tr><td colspan="9" style="color:var(--err)">No se pudo cargar el JSON: ${e2}</td></tr>`;return}
   }
+  items=data.items||[];
+  $('cTotal').textContent=items.length.toLocaleString('es-AR');
+  const f=data.estadisticas?.primer_codigo||items[0]?.ncm||'—';
+  const l=data.estadisticas?.ultimo_codigo||items[items.length-1]?.ncm||'—';
+  $('cRange').textContent=`${f} … ${l}`;
+  const caps=[...new Set(items.map(x=>x.capitulo_numero).filter(Boolean))].sort((a,b)=>Number(a)-Number(b));
+  caps.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=`Cap. ${c}`;$('fCap').appendChild(o)});
+  buildCh();applyFilter();
+  ['q','fCap','fOp','fStatus','fDesg','fSize'].forEach(id=>{$(id).addEventListener('input',applyFilter);$(id).addEventListener('change',applyFilter)});
+  $('btnClear').addEventListener('click',()=>{$('q').value='';$('fCap').value='';$('fOp').value='';$('fStatus').value='';$('fDesg').value='';$('fSize').value='100';applyFilter()});
+  $('pgPrev').addEventListener('click',()=>{if(page>0){page--;render();$('tableScroll').scrollTo(0,0)}});
+  $('pgNext').addEventListener('click',()=>{if(page<tp()-1){page++;render();$('tableScroll').scrollTo(0,0)}});
+  $('btnCsv').addEventListener('click',expCsv);
+  $('btnXlsx').addEventListener('click',expXlsx);
+  $('chToggle').addEventListener('click',()=>{$('chToggle').classList.toggle('open');$('chGrid').classList.toggle('show')});
 }
 init();
 </script>
