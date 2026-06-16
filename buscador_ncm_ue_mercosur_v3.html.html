@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Buscador NCM · Acuerdo UE-Mercosur · v3</title>
+<title>Buscador de productos por posición arancelaria | Acuerdo UE-Mercosur</title>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
 :root{
@@ -23,71 +23,75 @@ html.dark{
 }
 *{box-sizing:border-box;margin:0}
 body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);transition:background var(--transition),color var(--transition)}
-a{color:var(--brand2);text-decoration:none}
-.wrap{max-width:1520px;margin:0 auto;padding:20px 24px 40px}
+.wrap{max-width:1560px;margin:0 auto;padding:20px 24px 40px}
 
 /* Hero */
-.hero{background:linear-gradient(135deg,var(--hero-from),var(--hero-to));color:#fff;border-radius:20px;padding:30px 32px;box-shadow:var(--shadow);margin-bottom:18px;position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg,var(--hero-from),var(--hero-to));color:#fff;border-radius:20px;padding:28px 32px;box-shadow:var(--shadow);margin-bottom:18px;position:relative;overflow:hidden}
 .hero::after{content:'';position:absolute;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04);top:-120px;right:-60px}
-.hero h1{font-size:28px;margin-bottom:6px}
-.hero p{opacity:.92;line-height:1.5;max-width:900px}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+.hero-logo{height:48px;filter:brightness(0) invert(1);flex-shrink:0}
+.hero h1{font-size:26px;line-height:1.2}
+.hero p{opacity:.92;line-height:1.5;max-width:960px;font-size:14px}
 .theme-toggle{position:absolute;top:18px;right:20px;background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:999px;width:40px;height:40px;font-size:18px;cursor:pointer;backdrop-filter:blur(6px);transition:background var(--transition)}
 .theme-toggle:hover{background:rgba(255,255,255,.25)}
 
 /* Cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:16px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);transition:background var(--transition),border var(--transition)}
-.card .lbl{font-size:12px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
-.card .val{font-size:26px;font-weight:800}
+.card .lbl{font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+.card .val{font-size:24px;font-weight:800}
 
 /* Notice */
-.notice{padding:14px 18px;border:1px solid #fed7aa;background:#fff7ed;color:#92400e;border-radius:var(--radius);margin-bottom:16px;line-height:1.45;font-size:14px}
+.notice{padding:14px 18px;border:1px solid #fed7aa;background:#fff7ed;color:#92400e;border-radius:var(--radius);margin-bottom:16px;line-height:1.45;font-size:13px}
 html.dark .notice{background:#431407;border-color:#78350f;color:#fbbf24}
 
-/* Toolbar */
+/* Panel */
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);transition:background var(--transition),border var(--transition)}
-.toolbar{display:grid;grid-template-columns:2.5fr 1fr 1fr .8fr auto auto;gap:10px;padding:14px 16px;margin-bottom:16px;align-items:end}
-@media(max-width:1100px){.toolbar{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.toolbar{grid-template-columns:1fr}}
-label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
-input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);font-size:14px;transition:border var(--transition),background var(--transition)}
+
+/* Toolbar */
+.toolbar{display:grid;grid-template-columns:2fr .8fr .8fr .8fr .8fr .6fr auto auto;gap:10px;padding:14px 16px;margin-bottom:16px;align-items:end}
+@media(max-width:1200px){.toolbar{grid-template-columns:1fr 1fr 1fr 1fr}}
+@media(max-width:700px){.toolbar{grid-template-columns:1fr}}
+label{display:block;font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+input,select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);font-size:13px;transition:border var(--transition),background var(--transition)}
 input:focus,select:focus{outline:none;border-color:var(--brand2)}
-button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;font-size:13px;transition:background var(--transition),color var(--transition)}
+button{border:none;border-radius:10px;padding:9px 14px;font-weight:700;cursor:pointer;font-size:12px;transition:background var(--transition),color var(--transition)}
 .btn-p{background:var(--brand);color:#fff}
 .btn-p:hover{background:var(--brand2)}
 .btn-s{background:var(--accent);color:var(--brand)}
 
 /* Chapter cards */
-.chapters-toggle{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:700;font-size:15px;color:var(--brand)}
+.chapters-toggle{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:700;font-size:14px;color:var(--brand)}
 .chapters-toggle .arrow{transition:transform .3s;display:inline-block}
 .chapters-toggle.open .arrow{transform:rotate(90deg)}
-.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:16px;max-height:0;overflow:hidden;transition:max-height .4s ease}
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-bottom:16px;max-height:0;overflow:hidden;transition:max-height .4s ease}
 .chapter-grid.show{max-height:2000px}
-.ch-card{text-align:center;padding:12px 8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
+.ch-card{text-align:center;padding:10px 6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
 .ch-card:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 4px 14px rgba(10,61,107,.12)}
-.ch-card .ch-num{font-size:22px;font-weight:800;color:var(--brand)}
-.ch-card .ch-cnt{font-size:11px;color:var(--muted)}
+.ch-card .ch-num{font-size:20px;font-weight:800;color:var(--brand)}
+.ch-card .ch-cnt{font-size:10px;color:var(--muted)}
 
 /* Layout */
-.layout{display:grid;grid-template-columns:1.8fr .85fr;gap:16px;align-items:start}
+.layout{display:grid;grid-template-columns:1.9fr .8fr;gap:16px;align-items:start}
 @media(max-width:1100px){.layout{grid-template-columns:1fr}.detail-panel{position:static!important}}
 
 /* Table */
 .table-wrap{overflow:hidden;padding:0}
 .table-scroll{overflow:auto;max-height:74vh}
 table{width:100%;border-collapse:collapse}
-thead th{position:sticky;top:0;z-index:3;background:var(--accent);color:var(--brand);text-align:left;padding:11px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.3px;border-bottom:2px solid var(--line)}
+thead th{position:sticky;top:0;z-index:3;background:var(--accent);color:var(--brand);text-align:left;padding:10px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.3px;border-bottom:2px solid var(--line);white-space:nowrap}
 html.dark thead th{background:#1a2744}
-tbody td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13.5px}
+thead th[title]{cursor:help}
+tbody td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
 tbody tr{cursor:pointer;transition:background .15s}
 tbody tr:hover{background:var(--accent)}
 tbody tr.active{background:#dbeafe}
 html.dark tbody tr.active{background:#1e3a5f}
-code{background:var(--gray-bg);padding:3px 7px;border-radius:6px;font-size:12px;border:1px solid var(--line)}
+code{background:var(--gray-bg);padding:2px 6px;border-radius:6px;font-size:11px;border:1px solid var(--line)}
 html.dark code{background:#334155}
 
 /* Badges */
-.badge{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;font-size:10px;font-weight:700;white-space:nowrap}
 .badge-pending{background:var(--warn-bg);color:var(--warn);border:1px solid #fde68a}
 .badge-ok{background:var(--ok-bg);color:var(--ok);border:1px solid #86efac}
 .badge-no{background:var(--err-bg);color:var(--err);border:1px solid #fca5a5}
@@ -102,19 +106,20 @@ html.dark .badge-quota{background:#2e1065;border-color:#5b21b6}
 html.dark .badge-none{background:#1f2937;border-color:#374151}
 
 /* Pagination */
-.pager{display:flex;align-items:center;justify-content:center;gap:10px;padding:12px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-.pager button{min-width:34px}
+.pager{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.pager button{min-width:32px}
 
 /* Detail */
-.detail-panel{padding:18px;position:sticky;top:16px}
-.detail-panel h2{font-size:20px;margin-bottom:14px}
-.kv{display:grid;grid-template-columns:130px 1fr;gap:7px 10px;margin-bottom:14px}
-.kv .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
-.kv .v{font-size:13.5px;word-break:break-word}
+.detail-panel{padding:16px;position:sticky;top:16px}
+.detail-panel h2{font-size:18px;margin-bottom:12px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 10px;margin-bottom:12px}
+.kv .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.kv .v{font-size:13px;word-break:break-word}
 .mini{font-size:12px;color:var(--muted)}
 
 /* Footer */
-.footer{margin-top:20px;padding:16px;text-align:center;font-size:12px;color:var(--muted);line-height:1.5}
+.footer{margin-top:20px;padding:16px;text-align:center;font-size:11px;color:var(--muted);line-height:1.5;display:flex;flex-direction:column;align-items:center;gap:8px}
+.footer-logo{height:28px;opacity:.5}
 </style>
 </head>
 <body>
@@ -123,8 +128,11 @@ html.dark .badge-none{background:#1f2937;border-color:#374151}
 <!-- HERO -->
 <section class="hero">
   <button class="theme-toggle" id="themeBtn" title="Modo oscuro / claro">🌙</button>
-  <h1>Buscador de productos por posición arancelaria</h1>
-  <p>Base de datos NCM extraída del PDF oficial de la Nomenclatura Común del Mercosur. Incluye análisis de encuadre en el Acuerdo Interino UE-Mercosur (vigente desde 01/05/2026). Versión v3 con semáforo visual, fichas por capítulo, exportación a CSV y XLSX.</p>
+  <div class="hero-top">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Banco_Naci%C3%B3n.svg" alt="Banco Nación" class="hero-logo"/>
+    <h1>Buscador de productos por posición arancelaria | Acuerdo UE‑Mercosur</h1>
+  </div>
+  <p>Herramienta interna del Banco de la Nación Argentina. Base de datos NCM extraída del PDF oficial de la Nomenclatura Común del Mercosur. Incluye análisis de encuadre en el Acuerdo UE‑Mercosur. Versión v3.1 con semáforo visual, categoría de desgravación, fichas por capítulo, exportación a CSV y XLSX.</p>
 </section>
 
 <!-- CARDS -->
@@ -132,26 +140,26 @@ html.dark .badge-none{background:#1f2937;border-color:#374151}
   <div class="card"><div class="lbl">Total posiciones NCM</div><div class="val" id="cTotal">—</div></div>
   <div class="card"><div class="lbl">Resultados visibles</div><div class="val" id="cVisible">—</div></div>
   <div class="card"><div class="lbl">Capítulos</div><div class="val" id="cChapters">—</div></div>
-  <div class="card"><div class="lbl">Rango NCM</div><div class="val" id="cRange" style="font-size:16px">—</div></div>
+  <div class="card"><div class="lbl">Rango NCM</div><div class="val" id="cRange" style="font-size:15px">—</div></div>
 </section>
 
 <!-- NOTICE -->
 <div class="notice">
-  <strong>⚠ Advertencia metodológica:</strong> el campo <em>UE-Mercosur</em> figura inicialmente como <strong>pendiente de validación documental</strong>. La base procesada proviene de la NCM 2017 / AEC / RE del PDF, y no de los anexos de desgravación, exclusiones, contingentes ni reglas de origen del Acuerdo Interino. Para una determinación definitiva, cada posición debe contrastarse con el <em>Apéndice 2-A-2</em> y los cronogramas oficiales.
+  <strong>⚠ Advertencia metodológica:</strong> el campo <em>UE‑Mercosur</em> figura inicialmente como <strong>pendiente de validación documental</strong>. La <em>Categoría de desgravación</em> se completará al cruzar cada NCM contra el <em>Apéndice 2‑A‑2</em> del Acuerdo Interino. La columna <strong>Reintegro Exp. (%)</strong> corresponde al porcentaje de reintegro de exportación (RE) vigente según la NCM.
 </div>
 
 <!-- TOOLBAR -->
 <section class="panel toolbar">
   <div>
     <label for="q">Buscar por NCM o descripción</label>
-    <input id="q" placeholder="Ej.: 8703.23.10, bovinos, medicamentos, maquinaria…"/>
+    <input id="q" placeholder="Ej.: 8703.23.10, bovinos, maquinaria…"/>
   </div>
   <div>
     <label for="fCap">Capítulo</label>
     <select id="fCap"><option value="">Todos</option></select>
   </div>
   <div>
-    <label for="fStatus">Estado UE-Mercosur</label>
+    <label for="fStatus">Estado UE‑Mercosur</label>
     <select id="fStatus">
       <option value="">Todos</option>
       <option value="encuadra">✅ Encuadra</option>
@@ -162,17 +170,28 @@ html.dark .badge-none{background:#1f2937;border-color:#374151}
     </select>
   </div>
   <div>
+    <label for="fDesg">Cat. desgravación</label>
+    <select id="fDesg">
+      <option value="">Todas</option>
+      <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+      <option value="9">9</option><option value="10">10</option><option value="11">11</option>
+      <option value="12">12</option><option value="13">13</option><option value="14">14</option>
+      <option value="15">15</option><option value="TRQ">TRQ</option><option value="EXC">EXC</option>
+      <option value="S">S</option>
+    </select>
+  </div>
+  <div>
     <label for="fSize">Filas / pág.</label>
     <select id="fSize">
-      <option value="50">50</option>
-      <option value="100" selected>100</option>
-      <option value="250">250</option>
-      <option value="500">500</option>
+      <option value="50">50</option><option value="100" selected>100</option>
+      <option value="250">250</option><option value="500">500</option>
     </select>
   </div>
   <div>
     <label>&nbsp;</label>
-    <div style="display:flex;gap:6px">
+    <div style="display:flex;gap:5px">
       <button class="btn-p" id="btnCsv" title="Exportar CSV">📥 CSV</button>
       <button class="btn-p" id="btnXlsx" title="Exportar XLSX">📥 XLSX</button>
     </div>
@@ -193,7 +212,16 @@ html.dark .badge-none{background:#1f2937;border-color:#374151}
     <div class="table-scroll" id="tableScroll">
       <table>
         <thead>
-          <tr><th>NCM</th><th>Descripción</th><th>AEC</th><th>RE</th><th>Cap.</th><th>UE-Mercosur</th><th>Pág.</th></tr>
+          <tr>
+            <th>NCM</th>
+            <th>Descripción</th>
+            <th>AEC</th>
+            <th title="Categoría de desgravación según Acuerdo UE-Mercosur">Cat. Desgrav.</th>
+            <th title="RE = Reintegro de Exportación (%)">Reintegro Exp. (%)</th>
+            <th>Cap.</th>
+            <th>UE‑Mercosur</th>
+            <th>Pág.</th>
+          </tr>
         </thead>
         <tbody id="tbody"></tbody>
       </table>
@@ -213,8 +241,8 @@ html.dark .badge-none{background:#1f2937;border-color:#374151}
 
 <!-- FOOTER -->
 <div class="footer">
-  <strong>Instrucciones de despliegue:</strong> colocá <code>buscador_ncm_ue_mercosur_v3.html</code> y <code>ncm_desde_pagina_13.json</code> en la misma carpeta.<br>
-  Funciona en GitHub Pages, SharePoint (sitio estático), servidor web local o incluso abriendo directamente con un servidor tipo <code>python -m http.server</code>.
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Banco_Naci%C3%B3n.svg" alt="Banco Nación" class="footer-logo"/>
+  <span>Herramienta interna · Banco de la Nación Argentina · Colocá <code>buscador_ncm_ue_mercosur_v3.html</code> y <code>ncm_desde_pagina_13.json</code> en la misma carpeta.</span>
 </div>
 </div>
 
@@ -227,97 +255,63 @@ const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300
 let items=[],filtered=[],page=0,selNcm=null;
 
 /* ── badge helper ── */
-function badgeClass(status){
-  const m={'encuadra':'badge-ok','no_encuadra':'badge-no','pendiente_validacion_documental':'badge-pending','requiere_revision':'badge-review','contingente':'badge-quota'};
-  return m[status]||'badge-none';
-}
-function badgeDot(status){
-  const m={'encuadra':'🟢','no_encuadra':'🔴','pendiente_validacion_documental':'🟡','requiere_revision':'🔵','contingente':'🟣'};
-  return m[status]||'⚪';
-}
-function badge(status){
-  const cls=badgeClass(status);
-  const dot=badgeDot(status);
-  const label=(status||'sin_dato').replace(/_/g,' ');
-  return `<span class="badge ${cls}">${dot} ${label}</span>`;
-}
+function badgeClass(s){const m={'encuadra':'badge-ok','no_encuadra':'badge-no','pendiente_validacion_documental':'badge-pending','requiere_revision':'badge-review','contingente':'badge-quota'};return m[s]||'badge-none'}
+function badgeDot(s){const m={'encuadra':'🟢','no_encuadra':'🔴','pendiente_validacion_documental':'🟡','requiere_revision':'🔵','contingente':'🟣'};return m[s]||'⚪'}
+function badge(s){return `<span class="badge ${badgeClass(s)}">${badgeDot(s)} ${(s||'sin_dato').replace(/_/g,' ')}</span>`}
+function catDesg(x){return x?.acuerdo_ue_mercosur?.categoria_desgravacion ?? '—'}
 
 /* ── theme ── */
-function initTheme(){
-  const saved=localStorage.getItem('ncm-theme');
-  if(saved==='dark') document.documentElement.classList.add('dark');
-  updateThemeBtn();
-}
-function toggleTheme(){
-  document.documentElement.classList.toggle('dark');
-  localStorage.setItem('ncm-theme',document.documentElement.classList.contains('dark')?'dark':'light');
-  updateThemeBtn();
-}
-function updateThemeBtn(){
-  $('themeBtn').textContent=document.documentElement.classList.contains('dark')?'☀️':'🌙';
-}
+function initTheme(){if(localStorage.getItem('ncm-theme')==='dark')document.documentElement.classList.add('dark');updBtn()}
+function togTheme(){document.documentElement.classList.toggle('dark');localStorage.setItem('ncm-theme',document.documentElement.classList.contains('dark')?'dark':'light');updBtn()}
+function updBtn(){$('themeBtn').textContent=document.documentElement.classList.contains('dark')?'☀️':'🌙'}
 
 /* ── filter & paginate ── */
 function applyFilter(){
-  const q=norm($('q').value);
-  const cap=$('fCap').value;
-  const st=$('fStatus').value;
+  const q=norm($('q').value),cap=$('fCap').value,st=$('fStatus').value,dg=$('fDesg').value;
   filtered=items.filter(x=>{
     const okQ=!q||norm(x.search_text).includes(q)||norm(x.ncm).includes(q)||norm(x.codigo_sin_puntos).includes(q);
     const okC=!cap||x.capitulo_numero===cap;
-    const okS=!st||(x.acuerdo_ue_mercosur?.encuadre_preferencial||'')=== st;
-    return okQ&&okC&&okS;
+    const okS=!st||(x.acuerdo_ue_mercosur?.encuadre_preferencial||'')===st;
+    const okD=!dg||(x.acuerdo_ue_mercosur?.categoria_desgravacion||'')=== dg;
+    return okQ&&okC&&okS&&okD;
   });
-  page=0;
-  render();
+  page=0;render();
 }
-
-function pageSize(){return Number($('fSize').value)||100}
-function totalPages(){return Math.max(1,Math.ceil(filtered.length/pageSize()))}
+function ps(){return Number($('fSize').value)||100}
+function tp(){return Math.max(1,Math.ceil(filtered.length/ps()))}
 
 function render(){
   $('cVisible').textContent=filtered.length.toLocaleString('es-AR');
-  const ps=pageSize(),start=page*ps,end=Math.min(start+ps,filtered.length);
-  const rows=filtered.slice(start,end);
-  $('pgInfo').textContent=`Pág. ${page+1} de ${totalPages()} — ${filtered.length.toLocaleString('es-AR')} resultados`;
-
-  const tbody=$('tbody');
-  tbody.innerHTML=rows.map(x=>`
+  const s=page*ps(),e=Math.min(s+ps(),filtered.length),rows=filtered.slice(s,e);
+  $('pgInfo').textContent=`Pág. ${page+1} de ${tp()} — ${filtered.length.toLocaleString('es-AR')} resultados`;
+  const tb=$('tbody');
+  tb.innerHTML=rows.map(x=>`
     <tr data-n="${x.ncm}" class="${selNcm===x.ncm?'active':''}">
       <td><code>${x.ncm}</code></td>
       <td>${x.descripcion||''}</td>
       <td>${x.aec??''}</td>
+      <td>${catDesg(x)}</td>
       <td>${x.re??''}</td>
       <td>${x.capitulo_numero||''}</td>
       <td>${badge(x.acuerdo_ue_mercosur?.encuadre_preferencial)}</td>
       <td>${x.pagina_pdf??''}</td>
     </tr>`).join('');
-
-  tbody.querySelectorAll('tr').forEach(tr=>{
-    tr.addEventListener('click',()=>{
-      selNcm=tr.dataset.n;
-      const item=rows.find(r=>r.ncm===selNcm);
-      showDetail(item);
-      tbody.querySelectorAll('tr').forEach(r=>r.classList.toggle('active',r.dataset.n===selNcm));
-    });
+  tb.querySelectorAll('tr').forEach(tr=>{
+    tr.addEventListener('click',()=>{selNcm=tr.dataset.n;const it=rows.find(r=>r.ncm===selNcm);showD(it);tb.querySelectorAll('tr').forEach(r=>r.classList.toggle('active',r.dataset.n===selNcm))});
   });
-
-  if(rows.length&&!rows.find(r=>r.ncm===selNcm)){
-    selNcm=rows[0].ncm;
-    showDetail(rows[0]);
-    tbody.querySelector('tr')?.classList.add('active');
-  }
+  if(rows.length&&!rows.find(r=>r.ncm===selNcm)){selNcm=rows[0].ncm;showD(rows[0]);tb.querySelector('tr')?.classList.add('active')}
 }
 
-function showDetail(x){
-  if(!x){$('detail').innerHTML='<div class="mini">Sin selección.</div>';return;}
+function showD(x){
+  if(!x){$('detail').innerHTML='<div class="mini">Sin selección.</div>';return}
   $('detail').innerHTML=`
-    <div style="margin:14px 0">${badge(x.acuerdo_ue_mercosur?.encuadre_preferencial)}</div>
+    <div style="margin:12px 0">${badge(x.acuerdo_ue_mercosur?.encuadre_preferencial)}</div>
     <div class="kv">
       <div class="k">NCM</div><div class="v"><code>${x.ncm}</code></div>
       <div class="k">Descripción</div><div class="v">${x.descripcion||''}</div>
       <div class="k">AEC</div><div class="v">${x.aec??'—'}</div>
-      <div class="k">RE</div><div class="v">${x.re??'—'}</div>
+      <div class="k">Cat. desgravación</div><div class="v">${catDesg(x)}</div>
+      <div class="k">Reintegro Exp. (%)</div><div class="v">${x.re??'—'}</div>
       <div class="k">Partida</div><div class="v">${x.partida||''}</div>
       <div class="k">Capítulo</div><div class="v">${x.capitulo||x.capitulo_numero||''}</div>
       <div class="k">Sección</div><div class="v">${x.seccion||''}</div>
@@ -328,96 +322,55 @@ function showDetail(x){
 }
 
 /* ── chapter cards ── */
-function buildChapterCards(){
-  const map={};
-  items.forEach(x=>{const c=x.capitulo_numero;if(c){map[c]=(map[c]||0)+1}});
-  const keys=Object.keys(map).sort((a,b)=>Number(a)-Number(b));
-  $('cChapters').textContent=keys.length;
-  $('chGrid').innerHTML=keys.map(k=>`<div class="ch-card" data-ch="${k}"><div class="ch-num">${k}</div><div class="ch-cnt">${map[k]} pos.</div></div>`).join('');
-  $('chGrid').querySelectorAll('.ch-card').forEach(el=>{
-    el.addEventListener('click',()=>{
-      $('fCap').value=el.dataset.ch;
-      applyFilter();
-      $('tableScroll').scrollIntoView({behavior:'smooth'});
-    });
-  });
+function buildCh(){
+  const m={};items.forEach(x=>{const c=x.capitulo_numero;if(c)m[c]=(m[c]||0)+1});
+  const ks=Object.keys(m).sort((a,b)=>Number(a)-Number(b));
+  $('cChapters').textContent=ks.length;
+  $('chGrid').innerHTML=ks.map(k=>`<div class="ch-card" data-ch="${k}"><div class="ch-num">${k}</div><div class="ch-cnt">${m[k]} pos.</div></div>`).join('');
+  $('chGrid').querySelectorAll('.ch-card').forEach(el=>{el.addEventListener('click',()=>{$('fCap').value=el.dataset.ch;applyFilter();$('tableScroll').scrollIntoView({behavior:'smooth'})})});
 }
 
 /* ── export CSV ── */
-function exportCsv(){
+function expCsv(){
   const bom='\uFEFF';
-  const h=['NCM','CodigoSinPuntos','Descripcion','AEC','RE','Capitulo','CapituloNumero','Seccion','PaginaPDF','EncuadreUEMercosur','Motivo'];
+  const h=['NCM','CodigoSinPuntos','Descripcion','AEC','CategoriaDesgravacion','ReintegroExportacion','Capitulo','CapituloNumero','Seccion','PaginaPDF','EncuadreUEMercosur','Motivo'];
   const esc=v=>{const s=(v??'').toString().replace(/"/g,'""');return '"'+s+'"'};
   const lines=[h.join(';')];
-  filtered.forEach(r=>{
-    lines.push([r.ncm,r.codigo_sin_puntos,r.descripcion,r.aec,r.re,r.capitulo,r.capitulo_numero,r.seccion,r.pagina_pdf,r.acuerdo_ue_mercosur?.encuadre_preferencial,r.acuerdo_ue_mercosur?.motivo].map(esc).join(';'));
-  });
+  filtered.forEach(r=>{lines.push([r.ncm,r.codigo_sin_puntos,r.descripcion,r.aec,r.acuerdo_ue_mercosur?.categoria_desgravacion||'',r.re,r.capitulo,r.capitulo_numero,r.seccion,r.pagina_pdf,r.acuerdo_ue_mercosur?.encuadre_preferencial,r.acuerdo_ue_mercosur?.motivo].map(esc).join(';'))});
   dl('ncm_ue_mercosur.csv',bom+lines.join('\r\n'),'text/csv;charset=utf-8;');
 }
 
 /* ── export XLSX ── */
-function exportXlsx(){
+function expXlsx(){
   if(typeof XLSX==='undefined'){alert('SheetJS no se cargó. Verificá la conexión a internet.');return}
-  const rows=filtered.map(r=>({
-    NCM:r.ncm,Codigo:r.codigo_sin_puntos,Descripcion:r.descripcion,AEC:r.aec,RE:r.re,
-    Capitulo:r.capitulo,Cap_Num:r.capitulo_numero,Seccion:r.seccion,Pagina_PDF:r.pagina_pdf,
-    Encuadre_UE_Mercosur:r.acuerdo_ue_mercosur?.encuadre_preferencial,Motivo:r.acuerdo_ue_mercosur?.motivo
-  }));
-  const ws=XLSX.utils.json_to_sheet(rows);
-  const wb=XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,ws,'NCM');
-  XLSX.writeFile(wb,'ncm_ue_mercosur.xlsx');
+  const rows=filtered.map(r=>({NCM:r.ncm,Codigo:r.codigo_sin_puntos,Descripcion:r.descripcion,AEC:r.aec,Cat_Desgravacion:r.acuerdo_ue_mercosur?.categoria_desgravacion||'',Reintegro_Exp:r.re,Capitulo:r.capitulo,Cap_Num:r.capitulo_numero,Seccion:r.seccion,Pagina_PDF:r.pagina_pdf,Encuadre_UE_Mercosur:r.acuerdo_ue_mercosur?.encuadre_preferencial,Motivo:r.acuerdo_ue_mercosur?.motivo}));
+  const ws=XLSX.utils.json_to_sheet(rows);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'NCM');XLSX.writeFile(wb,'ncm_ue_mercosur.xlsx');
 }
 
-function dl(name,content,type){
-  const b=new Blob([content],{type});
-  const u=URL.createObjectURL(b);
-  const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u);
-}
+function dl(n,c,t){const b=new Blob([c],{type:t});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
 
 /* ── init ── */
 async function init(){
-  initTheme();
-  $('themeBtn').addEventListener('click',toggleTheme);
-
+  initTheme();$('themeBtn').addEventListener('click',togTheme);
   try{
-    const res=await fetch('ncm_desde_pagina_13.json');
-    const data=await res.json();
+    const res=await fetch('ncm_desde_pagina_13.json');const data=await res.json();
     items=data.items||[];
-
     $('cTotal').textContent=items.length.toLocaleString('es-AR');
-    const first=data.estadisticas?.primer_codigo||items[0]?.ncm||'—';
-    const last=data.estadisticas?.ultimo_codigo||items[items.length-1]?.ncm||'—';
-    $('cRange').textContent=`${first} … ${last}`;
-
-    // chapter dropdown
+    const f=data.estadisticas?.primer_codigo||items[0]?.ncm||'—';
+    const l=data.estadisticas?.ultimo_codigo||items[items.length-1]?.ncm||'—';
+    $('cRange').textContent=`${f} … ${l}`;
     const caps=[...new Set(items.map(x=>x.capitulo_numero).filter(Boolean))].sort((a,b)=>Number(a)-Number(b));
     caps.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=`Cap. ${c}`;$('fCap').appendChild(o)});
-
-    buildChapterCards();
-    applyFilter();
-
-    // events
-    ['q','fCap','fStatus','fSize'].forEach(id=>{
-      $(id).addEventListener('input',applyFilter);
-      $(id).addEventListener('change',applyFilter);
-    });
-    $('btnClear').addEventListener('click',()=>{
-      $('q').value='';$('fCap').value='';$('fStatus').value='';$('fSize').value='100';applyFilter();
-    });
+    buildCh();applyFilter();
+    ['q','fCap','fStatus','fDesg','fSize'].forEach(id=>{$(id).addEventListener('input',applyFilter);$(id).addEventListener('change',applyFilter)});
+    $('btnClear').addEventListener('click',()=>{$('q').value='';$('fCap').value='';$('fStatus').value='';$('fDesg').value='';$('fSize').value='100';applyFilter()});
     $('pgPrev').addEventListener('click',()=>{if(page>0){page--;render();$('tableScroll').scrollTo(0,0)}});
-    $('pgNext').addEventListener('click',()=>{if(page<totalPages()-1){page++;render();$('tableScroll').scrollTo(0,0)}});
-    $('btnCsv').addEventListener('click',exportCsv);
-    $('btnXlsx').addEventListener('click',exportXlsx);
-
-    // chapter toggle
-    $('chToggle').addEventListener('click',()=>{
-      $('chToggle').classList.toggle('open');
-      $('chGrid').classList.toggle('show');
-    });
-
+    $('pgNext').addEventListener('click',()=>{if(page<tp()-1){page++;render();$('tableScroll').scrollTo(0,0)}});
+    $('btnCsv').addEventListener('click',expCsv);
+    $('btnXlsx').addEventListener('click',expXlsx);
+    $('chToggle').addEventListener('click',()=>{$('chToggle').classList.toggle('open');$('chGrid').classList.toggle('show')});
   }catch(err){
-    $('tbody').innerHTML=`<tr><td colspan="7" style="color:var(--err)">No se pudo cargar <code>ncm_desde_pagina_13.json</code>: ${err}</td></tr>`;
+    $('tbody').innerHTML=`<tr><td colspan="8" style="color:var(--err)">No se pudo cargar <code>ncm_desde_pagina_13.json</code>: ${err}</td></tr>`;
   }
 }
 init();
