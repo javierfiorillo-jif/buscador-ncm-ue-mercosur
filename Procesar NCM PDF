@@ -1,0 +1,62 @@
+import pdfplumber, re, json, csv, os
+from datetime import datetime
+from collections import Counter
+
+PDF = "dec557apn_01.pdf"
+if not os.path.exists(PDF):
+    print(f"❌ No existe {PDF}")
+    exit(0)
+
+texto = ""
+with pdfplumber.open(PDF) as pdf:
+    print(f"Total páginas: {len(pdf.pages)}")
+    for i in range(14, len(pdf.pages)):
+        try:
+            texto += "\n" + (pdf.pages[i].extract_text() or "")
+        except: pass
+
+print(f"Caracteres: {len(texto):,}")
+
+pattern = re.compile(r'\b(\d{4}\.\d{2}\.\d{2})\b')
+lineas = texto.split('\n')
+ncm_data, ncm_set = [], set()
+
+for idx, linea in enumerate(lineas):
+    if not linea.strip(): continue
+    m = pattern.search(linea)
+    if m and m.group(1) not in ncm_set:
+        ncm = m.group(1); ncm_set.add(ncm)
+        pos = linea.find(ncm)
+        desc = linea[pos+len(ncm):].strip()
+        desc = re.sub(r'^[\s\-–—\*]+', '', desc)
+        desc = re.sub(r'\s+\d+[.,]?\d*\s+\d+[.,]?\d*\s*$', '', desc)
+        desc = re.sub(r'\s+(BK|BIT)?\s*\d+[.,]?\d*\s*$', '', desc)
+        desc = re.sub(r'\*+', '', desc)
+        desc = re.sub(r'\s+', ' ', desc).strip()
+        if len(desc) < 5 and idx+1 < len(lineas):
+            sig = lineas[idx+1].strip()
+            if sig and not pattern.search(sig):
+                ds = re.sub(r'^[\s\-–—\*]+', '', sig)
+                ds = re.sub(r'\s+\d+[.,]?\d*\s+\d+[.,]?\d*\s*$', '', ds)
+                ds = re.sub(r'\*+', '', ds)
+                ds = re.sub(r'\s+', ' ', ds).strip()
+                if ds and len(ds) > 3: desc = ds
+        ctx = ' '.join(lineas[max(0,idx-3):idx+3])
+        ncm_data.append({"ncm":ncm,"descripcion":desc[:300] or "(Ver)",
+                         "es_bk":bool(re.search(r'\bBK\b',ctx)),
+                         "es_bit":bool(re.search(r'\bBIT\b',ctx)),"capitulo":ncm[:2]})
+
+bk = sum(1 for x in ncm_data if x['es_bk'])
+bit = sum(1 for x in ncm_data if x['es_bit'])
+print(f"✅ NCM: {len(ncm_data):,} | BK: {bk} | BIT: {bit}")
+
+with open("ncm_completo_v5.json","w",encoding="utf-8") as f:
+    json.dump(ncm_data, f, ensure_ascii=False, indent=2)
+with open("ncm_completo_v5.csv","w",encoding="utf-8",newline="") as f:
+    w = csv.DictWriter(f, fieldnames=["ncm","descripcion","es_bk","es_bit","capitulo"])
+    w.writeheader(); w.writerows(ncm_data)
+
+fecha = datetime.now().strftime("%d/%m/%Y")
+stats = f"BK: {bk} | BIT: {bit} | Caps: {len(set(x['capitulo'] for x in ncm_data))}"
+datos = json.dumps(ncm_data, ensure_ascii=False)
+
